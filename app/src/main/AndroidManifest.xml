@@ -19,7 +19,7 @@
         </activity>
 
         <activity
-            android:name=".u1_7ActivityAlertDialogBox"
+            android:name=".u1_10SideEffect"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication">

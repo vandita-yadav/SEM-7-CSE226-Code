@@ -30,6 +30,7 @@ class u1_8LaunchedEffect: ComponentActivity() {
                 LaunchedEffectExample()
                 }
             }
+
         }
     }
 }
