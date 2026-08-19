@@ -78,8 +78,7 @@ fun EffectDemo() {
         }
     }
 
-    // DisposableEffect cleans up when the timer stops
-    // or when the composable leaves the screen.
+
     DisposableEffect(isRunning) {
 
         onDispose {
