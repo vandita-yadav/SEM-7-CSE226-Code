@@ -24,10 +24,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.CardDefaults
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 
 class u1_13CustomComposable: ComponentActivity()
 {
@@ -72,6 +79,15 @@ fun CustomComposableDemo()
                 {
                     Column(modifier = Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.Start)
                     {
+                        Image(
+                            painter = painterResource(id = R.drawable.profile_placeholder),
+                            contentDescription = "User Profile Picture",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.size(64.dp).clip(CircleShape)
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
                         Text(text = name[index], style = MaterialTheme.typography.titleLarge)
 
                         if (expanded)
