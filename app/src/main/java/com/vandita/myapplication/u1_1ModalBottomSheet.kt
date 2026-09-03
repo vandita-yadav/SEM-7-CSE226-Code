@@ -64,9 +64,8 @@ fun PlaceScreen()
     // Controls the state (Expanded / Hidden) of Modal Bottom Sheet
     val sheetState = rememberModalBottomSheetState()
     // Boolean variable to decide whether Bottom Sheet should appear
-    var showBottomSheet by remember{
-        mutableStateOf(false)
-    }
+    var showBottomSheet by remember{ mutableStateOf(false) }
+
     Scaffold(
         // Top App Bar
         topBar = {
@@ -80,46 +79,22 @@ fun PlaceScreen()
     ) { padding ->
 
         // Main container
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-
-                // Background Gradient
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFFE3F2FD),
-                            Color.White
-                        )
-                    )
-                )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+        Box(modifier = Modifier.fillMaxSize().padding(padding).background(Brush.verticalGradient(colors = listOf(Color(0xFFE3F2FD), Color.White))))
+        {
+            Column(modifier = Modifier.fillMaxSize().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally)
+            {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 // Card containing the place image
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(280.dp),
-
+                Card(modifier = Modifier.fillMaxWidth().height(280.dp),
                     shape = RoundedCornerShape(20.dp),
-
-                    elevation = CardDefaults.cardElevation(8.dp)
-                ) {
+                    elevation = CardDefaults.cardElevation(8.dp))
+                {
 
                     Image(
                         painter = painterResource(id = R.drawable.town),
                         contentDescription = "LPU Image",
-
                         modifier = Modifier.fillMaxSize(),
-
                         contentScale = ContentScale.Crop
                     )
 
@@ -146,17 +121,9 @@ fun PlaceScreen()
                 Spacer(modifier = Modifier.height(25.dp))
 
                 // Button to open Bottom Sheet
-                Button(
-                    onClick = {
-
-                        // Make Bottom Sheet visible
-                        showBottomSheet = true
-
-                    }
-                ) {
-
+                Button(onClick = {showBottomSheet = true })
+                {
                     Text("Show Place Details")
-
                 }
 
             }
@@ -164,28 +131,10 @@ fun PlaceScreen()
             // Bottom Sheet appears only if this condition becomes true
             if (showBottomSheet) {
 
-                ModalBottomSheet(
-
-                    // Executed when user taps outside
-                    // or swipes down the Bottom Sheet
-                    onDismissRequest = {
-
-                        // Hide Bottom Sheet
-                        showBottomSheet = false
-
-                    },
-
-                    // Bottom Sheet State
-                    sheetState = sheetState
-
-                ) {
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(20.dp)
-                    ) {
-
+                ModalBottomSheet(onDismissRequest = { showBottomSheet = false }, sheetState = sheetState)
+                {
+                    Column(modifier = Modifier.fillMaxWidth().padding(20.dp))
+                    {
                         // Place Name
                         Text(
                             text = "📍 Lovely Professional University",
@@ -212,24 +161,10 @@ fun PlaceScreen()
                         Spacer(modifier = Modifier.height(25.dp))
 
                         // Action Buttons
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-
-                            Button(onClick = { }) {
-
-                                Text("Directions")
-
-                            }
-
-                            Button(onClick = { }) {
-
-                                Text("Call")
-
-                            }
-
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly)
+                        {
+                            Button(onClick = { }) { Text("Directions") }
+                            Button(onClick = { }) { Text("Call") }
                         }
 
                         Spacer(modifier = Modifier.height(20.dp))

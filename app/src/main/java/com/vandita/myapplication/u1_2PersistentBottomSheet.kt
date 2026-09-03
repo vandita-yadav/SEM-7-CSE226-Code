@@ -37,35 +37,28 @@ class u1_2PersistentBottomSheet : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun PersistentBottomSheetDemo() {
+fun PersistentBottomSheetDemo()
+{
     val sheetState = rememberStandardBottomSheetState(
         initialValue = SheetValue.PartiallyExpanded,
-        skipHiddenState = true
-    )
-    val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = sheetState
-    )
+        skipHiddenState = true)
+
+    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetPeekHeight = 80.dp,
+
+    BottomSheetScaffold(scaffoldState = scaffoldState, sheetPeekHeight = 80.dp,
         sheetContent = {
             BottomSheetContent(
                 isExpanded = sheetState.currentValue == SheetValue.Expanded,
                 onToggle = {
                     scope.launch {
-                        if (sheetState.currentValue == SheetValue.Expanded) {
-                            sheetState.partialExpand()
-                        } else {
-                            sheetState.expand()
-                        }
+                        if (sheetState.currentValue == SheetValue.Expanded) { sheetState.partialExpand() }
+                        else { sheetState.expand() }
                     }
                 }
             )
         }
-    ) { paddingValues ->
-        MainScreenContent(paddingValues)
-    }
+    ) { paddingValues -> MainScreenContent(paddingValues) }
 }
 @Composable
 fun MainScreenContent(paddingValues: PaddingValues) {
