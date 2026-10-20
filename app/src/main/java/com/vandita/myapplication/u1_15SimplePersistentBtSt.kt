@@ -30,7 +30,7 @@ class u1_15SimplePersistentBtSt : ComponentActivity() {
 fun PersistentBottomSheetDemo2() {
 
     val sheetState = rememberStandardBottomSheetState(
-        initialValue = SheetValue.PartiallyExpanded,
+        initialValue = SheetValue.Expanded,
         skipHiddenState = true
     )
 
@@ -46,37 +46,25 @@ fun PersistentBottomSheetDemo2() {
 
         sheetContent = {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(16.dp))
+            {
 
-                Text(
-                    text = "Quick Actions",
-                    style = MaterialTheme.typography.titleLarge
-                )
+                Text(text = "Quick Actions", style = MaterialTheme.typography.titleLarge)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Button(
-                    onClick = { },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Button(onClick = { }, modifier = Modifier.fillMaxWidth())
+                {
                     Text("Add Student")
                 }
 
-                Button(
-                    onClick = { },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Button(onClick = { }, modifier = Modifier.fillMaxWidth())
+                {
                     Text("View Attendance")
                 }
 
-                Button(
-                    onClick = { },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Button(onClick = { }, modifier = Modifier.fillMaxWidth())
+                {
                     Text("Generate Report")
                 }
 
@@ -97,11 +85,8 @@ fun PersistentBottomSheetDemo2() {
         }
     ) { padding ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
+        Column(modifier = Modifier.fillMaxSize().padding(padding))
+        {
 
             Text(
                 text = "Student List",
@@ -111,17 +96,10 @@ fun PersistentBottomSheetDemo2() {
 
             val students = List(20) { "Student ${it + 1}" }
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp)
-            ) {
+            LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(16.dp))
+            {
                 items(students) { student ->
-
-                    Text(
-                        text = student,
-                        modifier = Modifier.padding(12.dp)
-                    )
-                }
+                    Text(text = student, modifier = Modifier.padding(12.dp)) }
             }
         }
     }

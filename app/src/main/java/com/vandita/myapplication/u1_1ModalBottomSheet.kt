@@ -1,6 +1,7 @@
 package com.vandita.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -163,8 +164,8 @@ fun PlaceScreen()
                         // Action Buttons
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly)
                         {
-                            Button(onClick = { }) { Text("Directions") }
-                            Button(onClick = { }) { Text("Call") }
+                            Button(onClick = { Log.d("Button","Direction button clicked") }) { Text("Directions") }
+                            Button(onClick = {Log.d("Button","Call button clicked") }) { Text("Call") }
                         }
 
                         Spacer(modifier = Modifier.height(20.dp))
