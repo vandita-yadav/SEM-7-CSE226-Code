@@ -50,7 +50,9 @@ fun FoodOrderScreen()
     var orderConfirmed by remember { mutableStateOf(false) }
 
 
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally)
+    Column(modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally)
     {
         Text(text = orderStatus, fontSize = 25.sp)
 
@@ -60,8 +62,10 @@ fun FoodOrderScreen()
             if(orderConfirmed) Text("Home")
         }
 
-        LaunchedEffect(isLoading) {
-            if (isLoading) {
+        LaunchedEffect(isLoading)
+        {
+            if (isLoading)
+            {
                 orderStatus = "⏲️ Preparing your order....."
 
                 delay(3000)

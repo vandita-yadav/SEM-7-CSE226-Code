@@ -57,12 +57,11 @@ class StudentResultViewModel : ViewModel()
     // COROUTINE BASICS + COROUTINE SCOPE
     fun checkResult()
     {
-        viewModelScope.launch {
+        viewModelScope.launch{
             isLoading = true
             message = "Checking result..."
             // Call suspend function
-            val result = getStudentResult()
-            message = result
+            message = getStudentResult()
             isLoading = false
         }
     }
@@ -71,39 +70,35 @@ class StudentResultViewModel : ViewModel()
         viewModelScope.launch {
             isLoading = true
             message = "Connecting to server..."
-            val data = withContext(Dispatchers.IO) {
-                getDataFromServer()
-            }
-            message = data
+            message = withContext(Dispatchers.IO) { getDataFromServer() }
             isLoading = false
         }
     }
     fun performCalculation() {
         viewModelScope.launch {
             message = "Performing calculation..."
-            val result = withContext(Dispatchers.Default) {
-                calculateResult()
-            }
+            val result = withContext(Dispatchers.Default) { calculateResult() }
             message = result
         }
     }
     // SUSPEND FUNCTION
-    private suspend fun getStudentResult(): String {
+    private suspend fun getStudentResult(): String
+    {
         // Simulate waiting for server
         delay(3000)
         return "🎉 Result: PASSED"
     }
     // IO WORK
-    private suspend fun getDataFromServer(): String {
+    private suspend fun getDataFromServer(): String
+    {
         delay(3000)
         return "📡 Data received from server"
     }
     // CPU-INTENSIVE WORK
-    private fun calculateResult(): String {
+    private fun calculateResult(): String
+    {
         var total = 0L
-        for (i in 1..5000000) {
-            total += i
-        }
+        for (i in 1..5000000) { total += i }
         return "Calculation completed\nTotal = $total"
     }
 
@@ -117,7 +112,9 @@ fun StudentResultScreen(viewModel: StudentResultViewModel = viewModel())
 {
     val message = viewModel.message
     val isLoading = viewModel.isLoading
-    Column(modifier = Modifier.fillMaxSize().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
+    Column(modifier = Modifier.fillMaxSize().padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center)
     {
         Text(text = "Student Result App", style = MaterialTheme.typography.headlineMedium)
 

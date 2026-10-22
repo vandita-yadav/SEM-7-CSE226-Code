@@ -71,7 +71,8 @@ fun FoodOrderScreen2()
         Spacer(modifier = Modifier.height(16.dp))
 
         if (isLoading) { CircularProgressIndicator() }
-        else {
+        else
+        {
             Button(onClick = { if (!orderConfirmed) { isLoading = true } })
             {
                 if (!orderConfirmed) Text("Place order") else Text("Home")
