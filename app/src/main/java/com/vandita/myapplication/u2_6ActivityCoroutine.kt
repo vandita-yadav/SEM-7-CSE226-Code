@@ -55,14 +55,13 @@ data class Article(
 // --------------------------------------------------
 // VIEWMODEL
 // --------------------------------------------------
-class NewsViewModel : ViewModel() {
+class NewsViewModel : ViewModel()
+{
 
     private val _news = MutableStateFlow<List<Article>>(emptyList())
     val news: StateFlow<List<Article>> = _news
 
-    init {
-        loadNews()
-    }
+    init { loadNews() }
 
     fun loadNews() {
         viewModelScope.launch {
@@ -83,7 +82,8 @@ class NewsViewModel : ViewModel() {
         emit(result)
     }.flowOn(Dispatchers.IO)
 
-    private fun fetchNewsFromApi(): List<Article> {
+    private fun fetchNewsFromApi(): List<Article>
+    {
         val apiKey = "YOUR_API_KEY"
         val url = URL("https://newsapi.org/v2/top-headlines?country=in&apiKey=$apiKey")
 
@@ -100,19 +100,14 @@ class NewsViewModel : ViewModel() {
         val articlesArray = jsonObject.getJSONArray("articles")
         val articleList = mutableListOf<Article>()
 
-        for (i in 0 until articlesArray.length()) {
+        for (i in 0 until articlesArray.length())
+        {
             val article = articlesArray.getJSONObject(i)
             val title = article.optString("title", "No title")
             val description = article.optString("description", "No description available")
             val imageUrl = article.optString("urlToImage", "")
 
-            articleList.add(
-                Article(
-                    title = title,
-                    description = description,
-                    imageUrl = imageUrl
-                )
-            )
+            articleList.add(Article(title = title, description = description, imageUrl = imageUrl))
         }
 
         return articleList

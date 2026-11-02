@@ -65,6 +65,8 @@ dependencies {
 
     // Coil - Image Loading
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 
     // Unit Tests
     testImplementation("junit:junit:4.13.2")
@@ -80,4 +82,11 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling-data")
     debugImplementation("androidx.compose.ui:ui-test-junit4")
+
+    implementation("androidx.room:room-runtime:2.8.3")
+    implementation("androidx.room:room-ktx:2.8.3")
+
+    // Kotlin Coroutines (for suspend functions and Flow)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+
 }

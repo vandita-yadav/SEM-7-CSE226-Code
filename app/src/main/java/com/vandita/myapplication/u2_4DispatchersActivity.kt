@@ -136,11 +136,9 @@ fun DispatcherActivity(
         Text(text = "Dispatcher: ${viewModel.dispatcherName}")
 
         Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = {
-                viewModel.loadData()
-            }
-        ) {
+
+        Button(onClick = { viewModel.loadData() })
+        {
             Text("Load Data")
         }
 

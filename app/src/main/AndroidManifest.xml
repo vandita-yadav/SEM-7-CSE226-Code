@@ -20,7 +20,7 @@
             android:theme="@style/Theme.MyApplication" />
 
         <activity
-            android:name=".u3_Activity_LifeCycle"
+            android:name=".u4_2RoomDatabase"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication">
