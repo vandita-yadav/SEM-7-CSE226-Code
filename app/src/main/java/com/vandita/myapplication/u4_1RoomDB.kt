@@ -75,18 +75,18 @@ data class Student1(
 @Dao
 interface StudentDao1 {
     @Insert
-    suspend fun insert(student: Student)
+    suspend fun insert(student: Student1)
     @Query("SELECT * FROM students ORDER BY id DESC")
-    fun getAllStudents(): Flow<List<Student>>
+    fun getAllStudents(): Flow<List<Student1>>
     @Delete
-    suspend fun delete(student: Student)
+    suspend fun delete(student: Student1)
 }
 // STEP 3: Database
 @Database(
-    entities = [Student::class],
+    entities = [Student1::class],
     version = 1,
     exportSchema = false
 )
 abstract class StudentDatabase1 : RoomDatabase() {
-    abstract fun studentDao(): StudentDao
+    abstract fun studentDao(): StudentDao1
 }

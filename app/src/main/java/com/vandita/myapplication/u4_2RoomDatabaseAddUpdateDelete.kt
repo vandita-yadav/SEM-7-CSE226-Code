@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +40,9 @@ interface StudentDao {
 
     @Delete
     suspend fun deleteStudent(student: Student)
+
+    @Update
+    suspend fun updateStudent(student: Student)
 }
 
 class StudentViewModel(
@@ -67,6 +69,12 @@ class StudentViewModel(
     fun deleteStudent(student: Student) {
         viewModelScope.launch {
             dao.deleteStudent(student)
+        }
+    }
+
+    fun updateStudent(student: Student) {
+        viewModelScope.launch {
+            dao.updateStudent(student)
         }
     }
 }
@@ -98,7 +106,7 @@ abstract class StudentDatabase : RoomDatabase() {
     }
 }
 
-class u4_2RoomDatabase : ComponentActivity() {
+class u4_2RoomDatabaseAddUpdateDelete : ComponentActivity() {
 
     private val viewModel: StudentViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -124,6 +132,7 @@ class u4_2RoomDatabase : ComponentActivity() {
 
 @Composable
 fun StudentScreen(viewModel: StudentViewModel) {
+    var id by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var age by remember { mutableStateOf("") }
 
@@ -140,6 +149,15 @@ fun StudentScreen(viewModel: StudentViewModel) {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
+
+        OutlinedTextField(
+            value = id,
+            onValueChange = { id = it },
+            label = { Text("Enter Student ID") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
             value = name,
@@ -164,6 +182,7 @@ fun StudentScreen(viewModel: StudentViewModel) {
                 val studentAge = age.toIntOrNull()
                 if (name.isNotBlank() && studentAge != null && studentAge > 0) {
                     viewModel.addStudent(name.trim(), studentAge)
+                    id = ""
                     name = ""
                     age = ""
                 }
@@ -171,6 +190,48 @@ fun StudentScreen(viewModel: StudentViewModel) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Add Student")
+        }
+
+        Button(
+            onClick = {
+                val studentId = id.toIntOrNull()
+                val studentAge = age.toIntOrNull()
+                if (studentId != null && studentAge != null && studentAge > 0 && name.isNotBlank()) {
+                    // Check if a record exists with the exact same ID and name
+                    val existingStudent = students.find { it.id == studentId && it.name.equals(name.trim(), ignoreCase = true) }
+                    if (existingStudent != null) {
+                        viewModel.updateStudent(
+                            Student(
+                                id = studentId,
+                                name = existingStudent.name,
+                                age = studentAge
+                            )
+                        )
+                        id = ""
+                        name = ""
+                        age = ""
+                    }
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Update Student")
+        }
+
+        Button(
+            onClick = {
+                val studentId = id.toIntOrNull()
+                if (studentId != null) {
+                    val existingStudent = students.find { it.id == studentId }
+                    if (existingStudent != null) {
+                        name = existingStudent.name
+                        age = existingStudent.age.toString()
+                    }
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Show Student")
         }
 
         Spacer(modifier = Modifier.height(25.dp))
@@ -218,3 +279,16 @@ fun StudentScreen(viewModel: StudentViewModel) {
         }
     }
 }
+
+/*
+1. Header with background and text  "Employee Manager"
+2. After "Add/Update Employee" Text heading
+3. Three text fields - Name, Department, Salary (Outlined text field with no box) and their respective Material UI Icons
+4. Two buttons - primary button "Add Employee" and Outlined Text button "Clear"
+5. After "Employee List" heading
+6. Shows the list of people added in the previous step (Name, then next line - Department | Salary)
+    Every profile should be displayed as list of cards with a edit button (pencil) and delete button (trash)
+7. Whenever employee is added or update - toast message should be displayed for the same.
+8. No update button (add button should do the same task)
+9. If user clicks on pencil icon for editing a profile, then the profile details should get filled automatically in above text field and user can enter new details and click on add
+* */

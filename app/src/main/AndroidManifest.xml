@@ -20,11 +20,10 @@
             android:theme="@style/Theme.MyApplication" />
 
         <activity
-            android:name=".u4_2RoomDatabase"
+            android:name=".u4_4CRUD"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication">
-            <!-- This tells Android to open this screen on launch -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
