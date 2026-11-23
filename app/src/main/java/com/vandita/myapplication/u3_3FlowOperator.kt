@@ -81,6 +81,6 @@ fun MarksScreen()
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center)
     {
-        Text(text = "New word is \n$result", fontSize =50.sp)
+        Text(text = "New word is \n$result", fontSize = 50.sp)
     }
 }

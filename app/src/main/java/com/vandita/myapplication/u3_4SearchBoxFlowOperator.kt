@@ -40,23 +40,18 @@ class u3_4SearchBoxFlowOperator : ComponentActivity()
 @Preview(showBackground = true)
 fun SearchScreen() {
 
-    var searchText by remember {
-        mutableStateOf("")
-    }
+    var searchText by remember { mutableStateOf("") }
 
-    var suggestions by remember {
-        mutableStateOf<List<String>>(emptyList())
-    }
+    var suggestions by remember { mutableStateOf<List<String>>(emptyList()) }
 
     val words = listOf(
         "apple","application", "applied", "application", "apply", "appliance",
         "applause", "banana", "orange", "grapes")
 
-    LaunchedEffect(searchText) {
+    LaunchedEffect(searchText)
+    {
 
-        flow {
-            emit(searchText)
-        }
+        flow { emit(searchText) }
             .debounce(500)
             .filter { it.isNotEmpty() }
             .distinctUntilChanged()
@@ -65,61 +60,36 @@ fun SearchScreen() {
                     it.startsWith(query, ignoreCase = true)
                 }
             }
-            .collect { result ->
-                suggestions = result
-            }
+            .collect { result -> suggestions = result }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(30.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
+    Column(modifier = Modifier.fillMaxSize().padding(30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
         Spacer(modifier = Modifier.height(80.dp))
 
-        Text(
-            text = "Search",
-            fontSize = 30.sp
-        )
+        Text(text = "Search", fontSize = 30.sp)
 
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
             value = searchText,
-            onValueChange = {
-                searchText = it
-            },
-            label = {
-                Text("Search word")
-            },
-            placeholder = {
-                Text("Type Here")
-            },
+            onValueChange = { searchText = it },
+            label = { Text("Search word") },
+            placeholder = { Text("Type Here") },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        if (suggestions.isNotEmpty()) {
-
-            Text(
-                text = "Suggestions:",
-                fontSize = 20.sp
-            )
+        if (suggestions.isNotEmpty())
+        {
+            Text(text = "Suggestions:", fontSize = 20.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             suggestions.forEach { suggestion ->
-
-                Text(
-                    text = suggestion,
-                    fontSize = 18.sp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
+                Text(text = suggestion, fontSize = 18.sp, modifier = Modifier.fillMaxWidth().padding(8.dp))
             }
         }
     }
