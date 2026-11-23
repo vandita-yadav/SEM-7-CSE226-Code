@@ -18,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+
 class u4_5RoomState : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,6 @@ data class CartItem(
 
 @Dao
 interface CartDao {
-
     @Insert
     suspend fun insert(item: CartItem)
 
